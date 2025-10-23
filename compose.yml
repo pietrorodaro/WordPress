@@ -1,0 +1,38 @@
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8095:80
+    environment:
+      WORDPRESS_DB_HOST: db1
+      WORDPRESS_DB_USER: exampleuser1
+      WORDPRESS_DB_PASSWORD: examplepass1
+      WORDPRESS_DB_NAME: exampledb1
+    volumes:
+      - ./wordpress:/var/www/html
+
+  db1:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: exampledb1
+      MYSQL_USER: exampleuser1
+      MYSQL_PASSWORD: examplepass1
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db1:/var/lib/mysql
+    ports: 
+        - 8899:3306
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8098:80
+    environment:
+      - PMA_ARBITRARY=1
+
+volumes:
+  db1:
+
