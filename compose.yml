@@ -4,32 +4,32 @@ services:
     image: wordpress
     restart: always
     ports:
-      - 8095:80
+      - 8080:80
     environment:
-      WORDPRESS_DB_HOST: db1
-      WORDPRESS_DB_USER: exampleuser1
-      WORDPRESS_DB_PASSWORD: examplepass1
-      WORDPRESS_DB_NAME: exampledb1
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
     volumes:
       - ./wordpress:/var/www/html
 
-  db1:
+  db:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_DATABASE: exampledb1
-      MYSQL_USER: exampleuser1
-      MYSQL_PASSWORD: examplepass1
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
       - db1:/var/lib/mysql
     ports: 
-        - 8899:3306
+        - 8090:3306
   phpmyadmin:
     image: phpmyadmin
     restart: always
     ports:
-      - 8098:80
+      - 8081:80
     environment:
       - PMA_ARBITRARY=1
 
